@@ -11,7 +11,6 @@ const MovieList = (props) => {
 
 
     return (
-      // JSX code for rendering the component
       <div>
       <div id="movie-cards">
         <div className="container">

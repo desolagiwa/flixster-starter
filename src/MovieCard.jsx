@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import "./MovieCard.css"
 
 const MovieCard = (props) => {
-    console.log(props);
+    // console.log(props);
     return(
         <span className="card">
             <img className="image" src={`https://image.tmdb.org/t/p/w185${props.image}`} />

@@ -10,4 +10,16 @@ function parseMovieData(data){
     return movies;
 }
 
+function concatData(data1,data2){
+    if (data1 === null){
+        return data2;
+    }
+    else if (data2 === null){
+        return data1;
+    }
+    data1.results = [...data1.results, ...data2.results]
+    return data1;
+}
+
 export { parseMovieData };
+export { concatData };
