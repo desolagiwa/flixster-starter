@@ -21,5 +21,26 @@ function concatData(data1,data2){
     return data1;
 }
 
+function getMovieDetails(data){
+    console.log("data 2:",data);
+    const details = [];
+    const genres = [];
+    for (let i=0;i<data.genres.length;i++){
+        genres.push(data.genres[i].name);
+    }
+    const title = data.original_title;
+    const rating = data.vote_average;
+    const image = data.poster_path;
+    const overview = data.overview;
+    const release_date = data.release_date;
+    const backdrop_path = data.backdrop_path;
+    const runtime = data.runtime;
+
+    details.push({title:title,rating:rating,image:image,overview:overview,release_date:release_date,backdrop_path:backdrop_path,runtime:runtime,genres:genres});
+    return details;
+
+}
+
 export { parseMovieData };
 export { concatData };
+export { getMovieDetails };
