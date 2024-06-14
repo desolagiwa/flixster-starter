@@ -22,7 +22,7 @@ function concatData(data1,data2){
 }
 
 function getMovieDetails(data){
-    console.log("data 2:",data);
+    // console.log("data 2:",data);
     // const details = [];
     const genres = [];
     for (let i=0;i<data.genres.length;i++){
@@ -41,6 +41,20 @@ function getMovieDetails(data){
 
 }
 
+const sortData = (data, filter) => {
+    // console.log("data 3:",data);
+    if (filter === 'release_date') {
+      data.results =  data.results.sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
+    } else if (filter === 'rating') {
+        data.results = data.results.sort((a, b) => b.vote_average - a.vote_average);
+    } else if (filter === 'popularity') {
+        data.results = data.results.sort((a, b) => b.popularity - a.popularity);
+    }
+    console.log(data)
+    return data;
+  }
+
 export { parseMovieData };
 export { concatData };
 export { getMovieDetails };
+export { sortData };

@@ -22,13 +22,13 @@ const MovieCard = (props) => {
     setIsClicked(!isClicked);
     setSelectedMovie(props.id);
 
-    console.log(isClicked)
-    console.log(props.id);
+    // console.log(isClicked)
+    // console.log(props.id);
   }
 
 
     useEffect(() => {
-        console.log("in useEffect")
+        // console.log("in useEffect")
         fetchData();
 
     }, [isClicked]);
@@ -36,17 +36,17 @@ const MovieCard = (props) => {
 
 
     const INFO_API_ENDPOINT = 'https://api.themoviedb.org/3/movie/'
-    console.log("before fetch")
-    console.log(`${INFO_API_ENDPOINT}${id}?language=en-US&api_key=${apiKey}`);
+    // console.log("before fetch")
+    // console.log(`${INFO_API_ENDPOINT}${id}?language=en-US&api_key=${apiKey}`);
 
     const fetchData = async () => {
         try {
 
-            console.log("in fatchData");
+            // console.log("in fatchData");
 
             const apiKey = import.meta.env.VITE_API_KEY;
             const url = `${INFO_API_ENDPOINT}${id}?language=en-US&api_key=${apiKey}`;
-            console.log(url);
+            // console.log(url);
             const response = await fetch(url, {
             method: 'GET',
             headers: {
@@ -59,21 +59,21 @@ const MovieCard = (props) => {
             throw new Error('Failed to fetch movie details');
             }
             const data = await response.json();
-            console.log("data", data);
+            // console.log("data", data);
             setMovieDetails(getMovieDetails(data));
             // console.log(movieDetails);
 
-            console.log("data", data);
+            // console.log("data", data);
             setData(data);
         } catch (error) {
             console.error(error);
             setError(error.message);
         }
-        console.log("here")
+        // console.log("here")
     }
-    console.log("after fetch")
+    // console.log("after fetch")
 
-    console.log(movieDetails);
+    // console.log(movieDetails);
 
     // movieDetails.genres is returning undefined, next issue to resolve
 
