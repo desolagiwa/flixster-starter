@@ -8,7 +8,7 @@ import { concatData } from './utils/utils'
 const App = () => {
 
   const API_ENDPOINT = 'https://api.themoviedb.org/3/movie/now_playing';
-  const SEARCH_API_ENDPOINT =  "https://api.themoviedb.org/3/search/movie";
+  const SEARCH_API_ENDPOINT = "https://api.themoviedb.org/3/search/movie";
 
 
   const [movieData, setMovieData] = useState(null);
@@ -47,32 +47,33 @@ const App = () => {
       console.error(error);
       setError(error.message);
     }
-    };
+  };
 
-    const fetchSearchData = async () => {
-      if (searchQuery !== '') {
-        try {
-          const apiKey = import.meta.env.VITE_API_KEY;
-          const url = `${SEARCH_API_ENDPOINT}?query=${searchQuery}&include_adult=false&language=en-US&page=${page}`;
-          const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-              accept: 'application/json',
-              Authorization: `Bearer ${apiKey}`,
-            },
-          });
-          if (!response.ok) {
-            throw new Error('Failed to fetch search data');
-          }
-          const data = await response.json();
-          setSearchData(data);
-          setError(null);
-        } catch (error) {
-          console.error(error);
-          setError(error.message);
+  const fetchSearchData = async () => {
+    if (searchQuery !== '') {
+      try {
+        const apiKey = import.meta.env.VITE_API_KEY;
+        const url = `${SEARCH_API_ENDPOINT}?query=${searchQuery}&include_adult=false&language=en-US&page=${page}`;
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${apiKey}`,
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch search data');
         }
+        const data = await response.json();
+        setSearchData(data);
+        setError(null);
+      } catch (error) {
+        console.error(error);
+        setError(error.message);
       }
-    };
+    }
+  };
+
 
   useEffect(() => {
     fetchData();
@@ -82,28 +83,28 @@ const App = () => {
     fetchSearchData();
   }, [searchQuery, page]);
 
-    const handleSearchChange = (event) => {
-      setSearchQuery(event.target.value);
-    };
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
 
-    const handleSearchSubmit = (event) => {
-      event.preventDefault();
-      setPage(1);
-      setMovieData(null);
-      setError(null);
-      fetchData();
-    };
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    setPage(1);
+    setMovieData(null);
+    setError(null);
+    fetchData();
+  };
 
-    const handleNowPlayingClick = () => {
-      setShowSearchBar(false);
-      setShowNowPlaying(true);
-      fetchData();
-    };
+  const handleNowPlayingClick = () => {
+    setShowSearchBar(false);
+    setShowNowPlaying(true);
+    fetchData();
+  };
 
-    const handleSearchClick = () => {
-      setShowSearchBar(true);
-      setShowNowPlaying(false);
-    };
+  const handleSearchClick = () => {
+    setShowSearchBar(true);
+    setShowNowPlaying(false);
+  };
 
   return (
     <div className="App">
@@ -118,7 +119,7 @@ const App = () => {
         {showSearchBar ? (
           <>
             <form onSubmit={handleSearchSubmit}>
-              <input type="text" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder="Search"/>
+              <input type="text" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder="Search" />
               <button type="submit">Search</button>
             </form>
             {searchData ? (
@@ -131,8 +132,8 @@ const App = () => {
           <>
             {movieData !== null ? (
               <>
-              <MovieList data={movieData} />
-              <button onClick={() => setPage(page + 1)}>Load More</button></>
+                <MovieList data={movieData} />
+                <button onClick={() => setPage(page => page + 1)}>Load More</button></>
             ) : (
               <div>Loading...</div>
             )}
