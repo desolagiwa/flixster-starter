@@ -1,11 +1,52 @@
-#movie-cards{
+/* #movie-cards{
     display: flex;
     flex-wrap: wrap;
-}
+    width: 75%;
+} */
 
 .container{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    /* row-gap: 10px; */
+
+    border: 2px solid yellow;
+
+}
+
+/* .full-container{
+    display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     row-gap: 10px;
-}
+} */
+
+.full-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* row-gap: 10px; */
+    /* margin: 10px; */
+
+    border: 2px solid red;
+  }
+
+  .sidebar {
+    width: 20%;
+    background-color: #f0f0f0;
+    /* padding: 20px; */
+  }
+
+  #movie-cards {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    row-gap: 5px;
+    column-gap: 3px;
+  }
+
+  .movie-cards{
+    width: 80%;
+  }

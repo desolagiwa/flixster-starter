@@ -1,12 +1,22 @@
+
 .modal {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #fefefe;
+    background-color: rgba(0,0,0,0.4);
+
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    text-shadow: 0 0 10px rgba(0, 0, 0,200);
     border: 1px solid #888;
     padding: 20px;
     width: 50%;
-    z-index: 1000; /* Higher z-index than the movie card list */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    box-shadow:  0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .modal-content{
+    color:white
   }

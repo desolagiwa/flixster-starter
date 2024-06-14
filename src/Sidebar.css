@@ -1,0 +1,14 @@
+.sidebar{
+    width: 20%
+}
+
+.side-cont{
+    justify-content: space-evenly;
+}
+
+.post-cont{
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 2px;
+    column-gap: 3px;
+}

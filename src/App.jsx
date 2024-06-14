@@ -42,10 +42,7 @@ const App = () => {
         throw new Error('Failed to fetch movie data');
       }
       const data = await response.json();
-      // const combinedData = concatData(movieData, data);
-      // setMovieData(combinedData);
       const sortedData = sortData(data, filter);
-      console.log("sorted data: ",sortedData);
       setMovieData(sortedData);
       setError(null);
     } catch (error) {
@@ -70,7 +67,6 @@ const App = () => {
           throw new Error('Failed to fetch search data');
         }
         const data = await response.json();
-        // setSearchData(data);
         const sortedData = sortData(data, filter);
         setSearchData(sortedData);
         setError(null);
@@ -100,9 +96,7 @@ const App = () => {
       }
       const data = await response.json();
       const combinedData = concatData(movieData, data);
-      // setMovieData(combinedData);
       const sortedData = sortData(combinedData, filter);
-      console.log("sorted data: ",sortedData);
       setMovieData(sortedData);
       setError(null);
     } catch (error) {
@@ -110,6 +104,11 @@ const App = () => {
       setError(error.message);
     }
   }
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+  // fetchData();
 
 
   useEffect(() => {
@@ -145,7 +144,6 @@ const App = () => {
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
-    console.log("filter: ", event.target.value);
   };
 
   const handleSearchClick = () => {
@@ -160,19 +158,33 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>🍿 Flixster 🎥</h1>
-        <nav>
-          <button onClick={handleNowPlayingClick}>Now Playing</button>
-          <button onClick={handleSearchClick}>Search</button>
-        </nav>
+        <form onSubmit={handleSearchSubmit}>
+          <input type="text" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder="Search" />
+          <button type="submit">Search</button>
+        </form>
         <select onChange={handleFilterChange} value={filter}>
           <option value="">Select a filter</option>
           <option value="release_date">Release Date</option>
           <option value="rating">Rating</option>
           <option value="popularity">Popularity</option>
+          <option value="title">Title</option>
       </select>
       </header>
       <main>
-        {showSearchBar ? (
+      {searchData ? (
+              <MovieList data={searchData} />
+            ) : (
+              <>
+              {movieData !== null ? (
+              <>
+                <MovieList data={movieData} />
+                <button onClick={() => setPage(page => page + 1)}>Load More</button></>
+            ) : (
+              <div>Loading...</div>
+            )}
+              </>
+            )}
+        {/* {showSearchBar ? (
           <>
             <form onSubmit={handleSearchSubmit}>
               <input type="text" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder="Search" />
@@ -194,8 +206,11 @@ const App = () => {
               <div>Loading...</div>
             )}
           </>
-        )}
+        )} */}
       </main>
+      <footer>
+        <p>2024 Flixster</p>
+      </footer>
     </div>
   );
 }

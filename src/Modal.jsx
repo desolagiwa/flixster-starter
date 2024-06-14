@@ -6,16 +6,20 @@ import { useEffect } from "react";
 import "./Modal.css"
 
 const Modal = (props) =>{
-    console.log(props.movieDetails);
+    const TRAILER_API_ENDPOINT = 'https://api.themoviedb.org/3/movie/'
+    const [data, setData] = useState(null);
+
+    const backdropURL = `https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces/${props.movieDetails.backdrop_path}`
     return (
-        <div className="modal">
+        <div className="modal" style={{backgroundImage: `url(${backdropURL})`}}>
             <div className="modal-content">
                 <h2>{props.movieDetails.title}</h2>
                 <p>Runtime: {props.movieDetails.runtime} minutes</p>
-                <img src={`https://image.tmdb.org/t/p/w154${props.movieDetails.image}`} alt={props.movieDetails.title} />
+                <img src={`https://image.tmdb.org/t/p/w154${props.movieDetails.image}`} className="modal-img" alt={props.movieDetails.title} />
                 <p>Release Date: {props.movieDetails.release_date}</p>
                 {/* <p>Genres: {movieDetails.genres.join(', ')}</p> */}
                 <p>Overview: {props.movieDetails.overview}</p>
+                <iframe width="200" height="150" src={props.trailer}></iframe>
                 <button onClick={props.onClose}>Close</button>
             </div>
         </div>

@@ -8,7 +8,6 @@ import { useEffect } from "react";
 import { getMovieDetails } from "./utils/utils";
 
 
-
 const MovieCard = (props) => {
   const [selectedMovie, setSelectedMovie] = useState(0);
   const [isClicked, setIsClicked] = useState(false);
@@ -17,36 +16,34 @@ const MovieCard = (props) => {
   const [error, setError] = useState(null);
   const [movieDetails, setMovieDetails] = useState([]);
   const apiKey = import.meta.env.VITE_API_KEY;
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isWatched, setIsWatched] = useState(false);
+  const TRAILER_API_ENDPOINT = 'https://api.themoviedb.org/3/movie/';
+  const [trailerData, setTrailerData] = useState([]);
+
+  const onFavoriteClick = props.onFavoriteClick;
+  const onWatchedClick = props.onWatchedClick;
 
   const handleCardClick = () => {
     setIsClicked(!isClicked);
     setSelectedMovie(props.id);
 
-    // console.log(isClicked)
-    // console.log(props.id);
   }
 
 
     useEffect(() => {
-        // console.log("in useEffect")
         fetchData();
+        fetchTrailerData();
 
     }, [isClicked]);
 
-
-
     const INFO_API_ENDPOINT = 'https://api.themoviedb.org/3/movie/'
-    // console.log("before fetch")
-    // console.log(`${INFO_API_ENDPOINT}${id}?language=en-US&api_key=${apiKey}`);
 
     const fetchData = async () => {
         try {
 
-            // console.log("in fatchData");
-
             const apiKey = import.meta.env.VITE_API_KEY;
             const url = `${INFO_API_ENDPOINT}${id}?language=en-US&api_key=${apiKey}`;
-            // console.log(url);
             const response = await fetch(url, {
             method: 'GET',
             headers: {
@@ -54,46 +51,63 @@ const MovieCard = (props) => {
                 Authorization: `Bearer ${apiKey}`,
             }
             });
-            // console.log("Response:", response);
             if (!response.ok) {
             throw new Error('Failed to fetch movie details');
             }
             const data = await response.json();
-            // console.log("data", data);
             setMovieDetails(getMovieDetails(data));
-            // console.log(movieDetails);
 
-            // console.log("data", data);
             setData(data);
         } catch (error) {
             console.error(error);
             setError(error.message);
         }
-        // console.log("here")
     }
-    // console.log("after fetch")
 
-    // console.log(movieDetails);
+    const fetchTrailerData = async () => {
+        try {
+            const apiKey = import.meta.env.VITE_API_KEY;
+            const url = `${TRAILER_API_ENDPOINT}${id}/videos`;
+            const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                accept: 'application/json',
+                Authorization: `Bearer ${apiKey}`,
+            }
+            });
+            if (!response.ok) {
+            throw new Error('Failed to fetch movie details');
+            }
+            const data = await response.json();
+            console.log("abcd",data);
+            setTrailerData(data.results[0].key);
+            console.log(data.results[0].key);
+            console.log("new ",trailerData);
+        } catch (error) {
+            console.error(error);
+            setError(error.message);
+        }
+    }
 
-    // movieDetails.genres is returning undefined, next issue to resolve
+    console.log("outside ",trailerData)
 
-    // console.log(movieDetails.genres);
-    // const function openModal(){
+    const trailer_url = `https://www.youtube.com/embed/${trailerData}`
 
-    // }
+
+
 
 
 
   return(
       <span className="card" onClick={handleCardClick}>
           <img className="image" src={`https://image.tmdb.org/t/p/w185${props.image}`} />
-          <div className="title">{props.title}</div>
-          <div className="rating">⭐️ {props.rating}</div>
-          {/* <button onClick={handleCardClick}>More Details</button> */}
+          <h3 className="title">{props.title}</h3>
+          <div><p className="rating">⭐️ {props.rating}</p></div>
+          <button className="favorite" onClick={(event) => onFavoriteClick(event, props.image)}> ❤️ </button>
+          <button className="watched" onClick={(event) => onWatchedClick(event, props.image)}> 👀 </button>
           {isClicked && (
-              <Modal id={props.id} onClose={() => setSelectedMovie(null)} movieDetails={movieDetails}/>
+              <Modal id={props.id} onClose={() => setSelectedMovie(null)} movieDetails={movieDetails} trailer={trailer_url}/>
           )}
-  {/* </div> */}
       </span>
   );
 }

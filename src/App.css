@@ -12,6 +12,14 @@
   padding: 20px;
 }
 
+.full-container{
+  border: 10px
+}
+
+.sidebar{
+  height: 100%;
+}
+
 @media (max-width: 600px) {
   .movie-card {
     width: 100%;
