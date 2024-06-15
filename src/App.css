@@ -4,12 +4,19 @@
 
 .App-header {
   background-color: #282c34;
-  display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
   color: white;
   padding: 20px;
+}
+h1{
+  font-size: 4em;
+  margin: 10px;
+}
+.header-cont{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .full-container{
@@ -18,6 +25,10 @@
 
 .sidebar{
   height: 100%;
+}
+button{
+  box-shadow: none;
+  background-color: #f4f4f4;
 }
 
 @media (max-width: 600px) {

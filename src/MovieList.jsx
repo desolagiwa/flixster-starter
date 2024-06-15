@@ -16,23 +16,21 @@ const MovieList = (props) => {
   };
 
 
-const handleFavoriteClick = (event, movie) => {
-  event.stopPropagation();
-  setFavoriteMovies((prevMovies) => [...prevMovies, movie  ]);
-};
+  const handleFavoriteClick = (event, movie) => {
+    event.stopPropagation();
+    setFavoriteMovies((prevMovies) => [...prevMovies, movie  ]);
+  };
 
-const handleWatchedClick = (event, movie) => {
-  event.stopPropagation();
-  setWatchedMovies((prevMovies) => [...prevMovies, movie]);
-};
+  const handleWatchedClick = (event, movie) => {
+    event.stopPropagation();
+    setWatchedMovies((prevMovies) => [...prevMovies, movie]);
+  };
 
-    const parsedData = parseMovieData(props);
+  const parsedData = parseMovieData(props);
 
-    console.log(favoriteMovies);
-
-    return (
-      <>
-      <button onClick={handleSidebarToggle}>Toggle Sidebar</button>
+  return (
+    <>
+      <div style={{textAlign: "start", margin:"2px"}}><button onClick={handleSidebarToggle}>Toggle Sidebar</button></div>
       <div className="full-container">
         {sidebarOpen && (
         <Sidebar
@@ -40,20 +38,20 @@ const handleWatchedClick = (event, movie) => {
           watchedMovies={watchedMovies}
           onClose={handleSidebarToggle}
         />
-      )}
+        )}
 
-      <div id="movie-cards">
-        <div className="container">
+        <div id="movie-cards">
+          <div className="container">
 
-        {parsedData.map(movie  => (
-          <MovieCard title={movie.title} rating={movie.rating} image={movie.image} id={movie.id} onFavoriteClick={handleFavoriteClick}
-          onWatchedClick={handleWatchedClick}/>
-        ))}
-      </div></div>
-
-
-      </div></>
-    );
+            {parsedData.map(movie  => (
+              <MovieCard title={movie.title} rating={movie.rating} image={movie.image} id={movie.id} onFavoriteClick={handleFavoriteClick}
+              onWatchedClick={handleWatchedClick}/>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
+  );
 
 }
 

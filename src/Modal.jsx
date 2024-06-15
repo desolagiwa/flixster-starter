@@ -13,14 +13,15 @@ const Modal = (props) =>{
     return (
         <div className="modal" style={{backgroundImage: `url(${backdropURL})`}}>
             <div className="modal-content">
+            <button onClick={props.onClose}>Close</button>
                 <h2>{props.movieDetails.title}</h2>
                 <p>Runtime: {props.movieDetails.runtime} minutes</p>
                 <img src={`https://image.tmdb.org/t/p/w154${props.movieDetails.image}`} className="modal-img" alt={props.movieDetails.title} />
                 <p>Release Date: {props.movieDetails.release_date}</p>
-                {/* <p>Genres: {movieDetails.genres.join(', ')}</p> */}
+                <p>Genres: {props.movieDetails.genres.join(', ')}</p>
                 <p>Overview: {props.movieDetails.overview}</p>
                 <iframe width="200" height="150" src={props.trailer}></iframe>
-                <button onClick={props.onClose}>Close</button>
+
             </div>
         </div>
     );

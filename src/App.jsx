@@ -105,12 +105,6 @@ const App = () => {
     }
   }
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-  // fetchData();
-
-
   useEffect(() => {
     fetchMoreData();
   }, [page]);
@@ -157,18 +151,20 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>🍿 Flixster 🎥</h1>
-        <form onSubmit={handleSearchSubmit}>
-          <input type="text" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder="Search" />
-          <button type="submit">Search</button>
-        </form>
-        <select onChange={handleFilterChange} value={filter}>
-          <option value="">Select a filter</option>
-          <option value="release_date">Release Date</option>
-          <option value="rating">Rating</option>
-          <option value="popularity">Popularity</option>
-          <option value="title">Title</option>
-      </select>
+        <div><h1>🍿 Flixster 🎥</h1></div>
+        <div className='header-cont'>
+          <form onSubmit={handleSearchSubmit}>
+            <input type="text" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder="Search" />
+            <button type="submit">Search</button>
+          </form>
+          <select onChange={handleFilterChange} value={filter}>
+            <option value="">Select a filter</option>
+            <option value="release_date">Release Date</option>
+            <option value="rating">Rating</option>
+            <option value="popularity">Popularity</option>
+            <option value="title">Title</option>
+          </select>
+        </div>
       </header>
       <main>
       {searchData ? (
@@ -184,29 +180,6 @@ const App = () => {
             )}
               </>
             )}
-        {/* {showSearchBar ? (
-          <>
-            <form onSubmit={handleSearchSubmit}>
-              <input type="text" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder="Search" />
-              <button type="submit">Search</button>
-            </form>
-            {searchData ? (
-              <MovieList data={searchData} />
-            ) : (
-              <MovieList data={movieData} />
-            )}
-          </>
-        ) : (
-          <>
-            {movieData !== null ? (
-              <>
-                <MovieList data={movieData} />
-                <button onClick={() => setPage(page => page + 1)}>Load More</button></>
-            ) : (
-              <div>Loading...</div>
-            )}
-          </>
-        )} */}
       </main>
       <footer>
         <p>2024 Flixster</p>

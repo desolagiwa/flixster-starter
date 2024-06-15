@@ -2,8 +2,8 @@
     width:200px;
     border: 1px solid #ddd;
     margin: 15px;
+    transition: all 0.3s ease-in-out;
 }
-
 .title{
     margin:2px
 }
@@ -14,40 +14,16 @@
     justify-content: start;
     margin: 1px;
 }
-
-button{
-    background-color: white; /* Blue background */
-    color: #ffffff;
-    padding: 0px;
-    border-radius: 5px;
-    box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
-}
-
 .favorite, .watched {
     size: 5px;
-    background-color: #ffffff;
-    color: #ffffff;
+    background-color: #f4f4f4;
+    color: grey;
     padding: 2px;
     border-radius: 5px;
     border: none;
-    cursor: pointer; /* Change the cursor shape to a pointer */
-  }
-
-  .favorite:hover, .watched:hover {
-    background-color: gray;
+    cursor: pointer;
+    box-shadow: none;
   }
   .favorite.clicked, .watched.clicked{
     background-color: gray;
   }
-
-  /* .favorite::before, .watched::before {
-    font-family: "Font Awesome 5 Free";
-  }
-
-  .favorite::before {
-    content: "\f004";
-  }
-
-  .watched::before {
-    content: "\f06e";
-  } */
